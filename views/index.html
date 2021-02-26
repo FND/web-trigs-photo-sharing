@@ -27,15 +27,24 @@
 
 	<main>
 		<ol class="gallery">
-			{% for image in images %}
+			{% for entry in images %}
 			<li>
-				<a href="{{ image.url }}">
+				<a href="{{ entry.source }}">
 					<figure>
-						<img src="{{ image.image }}" alt="">
-						<figcaption>{{ image.caption }}</figcaption>
+						<img src="{{ entry.image }}" alt="">
+						<figcaption>{{ entry.caption }}</figcaption>
 					</figure>
 				</a>
-				<community-likes></community-likes>
+				<community-likes>
+					<form action="{{ entry.url }}" method="post">
+						{% if entry.liked %}
+							<button name="liked" value="0">⭑</button>
+						{% else %}
+							<button name="liked" value="1">⭒</button>
+						{% endif %}
+					</form>
+					<var>{{ entry.likes }}</var>
+				</community-likes>
 			</li>
 			{% endfor %}
 		</ol>

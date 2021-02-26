@@ -73,6 +73,7 @@ label {
 	list-style-type: none;
 }
 .gallery li {
+	position: relative;
 	max-width: 25vw; /* XXX: magic number */
 	margin-bottom: 1rem;
 	border-radius: 0.5rem;
@@ -91,4 +92,16 @@ label {
 .gallery figcaption {
 	padding: 0.5em;
 	color: #EEE;
+}
+
+community-likes {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	display: block;
+	padding: 0.5rem;
+	border: 1px solid #AAA;
+	border-radius: 0.5rem;
+	text-align: center;
+	background-color: #EEE;
 }
