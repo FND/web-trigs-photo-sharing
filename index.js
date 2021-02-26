@@ -23,6 +23,7 @@ let IMAGES = [{
 	url: "/photos/shakyamuni",
 	source: "https://collections.si.edu/search/detail/edanmdm:fsg,_F1909.94",
 	image: "https://ids.si.edu/ids/deliveryService?id=FS-7755_05&max=500",
+	// eslint-disable-next-line max-len
 	caption: "Pedestal with lotus petals, lions, and donor, originally supporting a Shijia Buddha (Shakyamuni) figure",
 	liked: Math.random() > 0.5,
 	likes: 3

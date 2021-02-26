@@ -1,10 +1,14 @@
 {
 	"scripts": {
-		"start": "node index.js"
+		"start": "node index.js",
+		"test": "eslint --cache *.js && echo ✓"
 	},
 	"type": "module",
 	"dependencies": {
 		"express": "^4.17.1",
 		"nunjucks": "^3.2.3"
+	},
+	"devDependencies": {
+		"eslint-config-fnd": "^1.10.0"
 	}
 }
