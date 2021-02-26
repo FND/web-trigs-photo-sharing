@@ -1,6 +1,7 @@
 {
 	"scripts": {
 		"start": "node index.js",
+		"dev": "nodemon --watch index.js npm start",
 		"test": "eslint --cache *.js && echo ✓"
 	},
 	"type": "module",
@@ -9,6 +10,7 @@
 		"nunjucks": "^3.2.3"
 	},
 	"devDependencies": {
-		"eslint-config-fnd": "^1.10.0"
+		"eslint-config-fnd": "^1.10.0",
+		"nodemon": "^2.0.7"
 	}
 }

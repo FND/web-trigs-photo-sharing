@@ -12,4 +12,5 @@ Getting Started
 * ensure [Node](https://nodejs.org) is installed (version 13 or above)
 * `npm install` downloads dependencies
 * `npm start` launches the server
+    * `npm run dev` automatically restarts while monitoring code changes
 * `npm test` checks code for stylistic consistency
