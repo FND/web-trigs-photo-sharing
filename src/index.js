@@ -19,6 +19,12 @@ let ROUTES = {
 		POST: toggleLike
 	}
 };
+let USER = {
+	id: "johndoe",
+	name: "John Doe",
+	avatar: "dummy.jpg",
+	role: "web dresser"
+};
 
 let app = express();
 nunjucks.configure(absolutePath("../views"), {
@@ -32,12 +38,16 @@ let server = app.listen(PORT, HOST, () => {
 });
 
 function showRoot(req, res) {
-	res.render("index.html", { entries: STORE.all });
+	res.render("index.html", {
+		profile: USER,
+		entries: STORE.all
+	});
 }
 
 function toggleLike(req, res) {
-	let op = req.body.liked === "1" ? "liked" : "unliked";
-	console.error(`${op} photo: ${req.params.id}`);
+	let { user, liked } = req.body;
+	let op = liked === "1" ? "liked" : "unliked";
+	console.error(`${user} ${op} photo: ${req.params.id}`);
 	res.redirect("/");
 }
 

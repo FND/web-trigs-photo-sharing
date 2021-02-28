@@ -16,9 +16,9 @@
 		</h1>
 
 		<article class="profile">
-			<img src="dummy.jpg" alt="avatar">
-			<b>John Doe</b>
-			<small>web dresser</small>
+			<img src="{{ profile.avatar }}" alt="avatar">
+			<b>{{ profile.name }}</b>
+			<small>{{ profile.role }}</small>
 			<a href="#profile">edit</a>
 		</article>
 
@@ -37,6 +37,7 @@
 				</a>
 				<community-likes>
 					<form action="{{ entry.url }}" method="post">
+						<input type="hidden" name="user" value="{{ profile.id }}">
 						{% if entry.liked %}
 							<button name="liked" value="0">⭑</button>
 						{% else %}
