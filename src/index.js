@@ -2,6 +2,7 @@ import { register } from "./router.js";
 import { Store } from "./store.js";
 import express from "express";
 import nunjucks from "nunjucks";
+import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
 import path from "path";
 
@@ -27,9 +28,8 @@ let USER = {
 };
 
 let app = express();
-nunjucks.configure(absolutePath("../views"), {
-	express: app
-});
+app.use(cookieParser("e3259fb6-4d9d-464e-85d2-509abf383099"));
+nunjucks.configure(absolutePath("../views"), { express: app });
 register(app, ROUTES);
 
 let server = app.listen(PORT, HOST, () => {
@@ -38,6 +38,13 @@ let server = app.listen(PORT, HOST, () => {
 });
 
 function showRoot(req, res) {
+	if(req.signedCookies.user !== USER.id) {
+		res.cookie("user", USER.id, {
+			httpOnly: true,
+			signed: true
+		});
+	}
+
 	res.render("index.html", {
 		profile: USER,
 		entries: STORE.all
@@ -45,7 +52,14 @@ function showRoot(req, res) {
 }
 
 function toggleLike(req, res) {
-	let { user, liked } = req.body;
+	let { user } = req.signedCookies;
+	if(!user) {
+		res.set("Content-Type", "text/plain");
+		res.status(401).send("unauthorized");
+		return;
+	}
+
+	let { liked } = req.body;
 	let op = liked === "1" ? "liked" : "unliked";
 	console.error(`${user} ${op} photo: ${req.params.id}`);
 	res.redirect("/");

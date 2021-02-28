@@ -37,7 +37,6 @@
 				</a>
 				<community-likes>
 					<form action="{{ entry.url }}" method="post">
-						<input type="hidden" name="user" value="{{ profile.id }}">
 						{% if entry.liked %}
 							<button name="liked" value="0">⭑</button>
 						{% else %}
