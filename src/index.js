@@ -1,3 +1,4 @@
+import { register } from "./router.js";
 import express from "express";
 import nunjucks from "nunjucks";
 import { fileURLToPath } from "url";
@@ -5,6 +6,7 @@ import path from "path";
 
 let HOST = "localhost";
 let PORT = 3000;
+let ROOT = path.dirname(fileURLToPath(import.meta.url));
 let IMAGES = [{
 	url: "/photos/perseverance",
 	source: "https://images.nasa.gov/details-PIA24430",
@@ -35,30 +37,37 @@ let IMAGES = [{
 	liked: Math.random() > 0.5,
 	likes: 7
 }];
-
-let ROOT = path.dirname(fileURLToPath(import.meta.url));
+let ROUTES = {
+	"/": {
+		middleware: express.static(absolutePath("../assets")),
+		GET: showRoot
+	},
+	"/photos/:id": {
+		middleware: express.urlencoded({ extended: false }),
+		POST: toggleLike
+	}
+};
 
 let app = express();
-app.use("/", express.static(absolutePath("../assets")));
 nunjucks.configure(absolutePath("../views"), {
 	express: app
 });
-
-app.get("/", (req, res) => {
-	res.render("index.html", { images: IMAGES });
-});
-
-app.use("/photos/:id", express.urlencoded({ extended: false }));
-app.post("/photos/:id", (req, res) => {
-	let op = req.body.liked === "1" ? "liked" : "unliked";
-	console.error(`${op} photo: ${req.params.id}`);
-	res.redirect("/");
-});
+register(app, ROUTES);
 
 let server = app.listen(PORT, HOST, () => {
 	let { address, port } = server.address();
 	console.error(`→ http://${address}:${port}`);
 });
+
+function showRoot(req, res) {
+	res.render("index.html", { images: IMAGES });
+}
+
+function toggleLike(req, res) {
+	let op = req.body.liked === "1" ? "liked" : "unliked";
+	console.error(`${op} photo: ${req.params.id}`);
+	res.redirect("/");
+}
 
 function absolutePath(filepath) {
 	return path.resolve(ROOT, filepath);
