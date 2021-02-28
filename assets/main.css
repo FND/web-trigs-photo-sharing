@@ -105,3 +105,24 @@ community-likes {
 	text-align: center;
 	background-color: #EEE;
 }
+community-likes button {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-size: 1.5rem;
+}
+community-likes b {
+	display: block;
+}
+community-likes[aria-busy=true] b {
+	animation: 2s linear infinite spin;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

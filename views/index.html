@@ -35,12 +35,14 @@
 						<figcaption>{{ entry.caption }}</figcaption>
 					</figure>
 				</a>
-				<community-likes>
+				<community-likes data-id="photo-{{ entry.id }}">
 					<form action="{{ resolveURI("photo", entry.id) }}" method="post">
 						{% if entry.isLikedBy(currentUser) %}
-							<button name="liked" value="0">⭑</button>
+							<input type="hidden" name="liked" value="0">
+							<button><b>⭑</b></button>
 						{% else %}
-							<button name="liked" value="1">⭒</button>
+							<input type="hidden" name="liked" value="1">
+							<button><b>⭒</b></button>
 						{% endif %}
 					</form>
 					<var>{{ entry.likes.length }}</var>
@@ -88,6 +90,8 @@
 			<button>save</button>
 		</fieldset>
 	</form>
+
+	<script type="module" src="elements/community-likes/index.js" async></script>
 </body>
 
 </html>
