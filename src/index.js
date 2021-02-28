@@ -12,10 +12,13 @@ let ROOT = path.dirname(fileURLToPath(import.meta.url));
 let STORE = new Store();
 let ROUTES = {
 	"/": {
+		name: "root",
 		middleware: express.static(absolutePath("../assets")),
 		GET: showRoot
 	},
 	"/photos/:id": {
+		name: "photo",
+		uri: id => ({ id }),
 		middleware: express.urlencoded({ extended: false }),
 		POST: toggleLike
 	}
@@ -30,7 +33,7 @@ let USER = {
 let app = express();
 app.use(cookieParser("e3259fb6-4d9d-464e-85d2-509abf383099"));
 nunjucks.configure(absolutePath("../views"), { express: app });
-register(app, ROUTES);
+let resolveURI = register(app, ROUTES);
 
 let server = app.listen(PORT, HOST, () => {
 	let { address, port } = server.address();
@@ -48,7 +51,8 @@ function showRoot(req, res) {
 	res.render("index.html", {
 		currentUser: USER.id,
 		profile: USER,
-		entries: STORE.all
+		entries: STORE.all,
+		resolveURI
 	});
 }
 
@@ -67,7 +71,7 @@ function toggleLike(req, res) {
 	} else {
 		STORE.removeLike(id, user);
 	}
-	res.redirect("/");
+	res.redirect(resolveURI("root"));
 }
 
 function absolutePath(filepath) {

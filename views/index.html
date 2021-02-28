@@ -36,7 +36,7 @@
 					</figure>
 				</a>
 				<community-likes>
-					<form action="{{ entry.url }}" method="post">
+					<form action="{{ resolveURI("photo", entry.id) }}" method="post">
 						{% if entry.isLikedBy(currentUser) %}
 							<button name="liked" value="0">⭑</button>
 						{% else %}

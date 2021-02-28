@@ -67,8 +67,4 @@ export class Entry {
 	isLikedBy(username) {
 		return this.likes.includes(username);
 	}
-
-	get url() {
-		return `/photos/${this.id}`; // XXX: hard-coded
-	}
 }
