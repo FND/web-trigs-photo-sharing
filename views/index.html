@@ -37,13 +37,13 @@
 				</a>
 				<community-likes>
 					<form action="{{ entry.url }}" method="post">
-						{% if entry.liked %}
+						{% if entry.isLikedBy(currentUser) %}
 							<button name="liked" value="0">⭑</button>
 						{% else %}
 							<button name="liked" value="1">⭒</button>
 						{% endif %}
 					</form>
-					<var>{{ entry.likes }}</var>
+					<var>{{ entry.likes.length }}</var>
 				</community-likes>
 			</li>
 			{% endfor %}

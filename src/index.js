@@ -46,6 +46,7 @@ function showRoot(req, res) {
 	}
 
 	res.render("index.html", {
+		currentUser: USER.id,
 		profile: USER,
 		entries: STORE.all
 	});
@@ -59,9 +60,13 @@ function toggleLike(req, res) {
 		return;
 	}
 
+	let { id } = req.params;
 	let { liked } = req.body;
-	let op = liked === "1" ? "liked" : "unliked";
-	console.error(`${user} ${op} photo: ${req.params.id}`);
+	if(liked === "1") {
+		STORE.addLike(id, user);
+	} else {
+		STORE.removeLike(id, user);
+	}
 	res.redirect("/");
 }
 
