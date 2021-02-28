@@ -1,8 +1,10 @@
 {
+	"name": "web-trigs-photo-sharing",
+	"private": true,
 	"scripts": {
-		"start": "node index.js",
-		"dev": "nodemon --watch index.js npm start",
-		"test": "eslint --cache *.js && echo ✓"
+		"start": "node src/index.js",
+		"dev": "nodemon --watch src npm start",
+		"test": "eslint --cache src && echo ✓"
 	},
 	"type": "module",
 	"dependencies": {

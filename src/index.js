@@ -39,8 +39,8 @@ let IMAGES = [{
 let ROOT = path.dirname(fileURLToPath(import.meta.url));
 
 let app = express();
-app.use("/", express.static(absolutePath("./assets")));
-nunjucks.configure(absolutePath("./views"), {
+app.use("/", express.static(absolutePath("../assets")));
+nunjucks.configure(absolutePath("../views"), {
 	express: app
 });
 
@@ -55,7 +55,7 @@ app.post("/photos/:id", (req, res) => {
 	res.redirect("/");
 });
 
-let server = app.listen(PORT, HOST, _ => {
+let server = app.listen(PORT, HOST, () => {
 	let { address, port } = server.address();
 	console.error(`→ http://${address}:${port}`);
 });
