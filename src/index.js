@@ -16,6 +16,13 @@ let ROUTES = {
 		middleware: express.static(absolutePath("../assets")),
 		GET: showRoot
 	},
+	"/:filepath": {
+		// NB: corresponding handler registered as `root` middleware
+		name: "asset",
+		uri: filepath => ({
+			filepath: filepath.split("/")
+		})
+	},
 	"/photos/:id": {
 		name: "photo",
 		uri: id => ({ id }),

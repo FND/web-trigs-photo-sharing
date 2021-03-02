@@ -51,6 +51,9 @@ let PATTERN = /:([a-zA-Z0-9]+)/g; // XXX: too restrictive?
 function supplant(str, params) {
 	return str.indexOf(":") === -1 ? str : str.replace(PATTERN, (match, key) => {
 		let res = params[key];
+		if(res.pop) {
+			return res.map(part => encodeURIComponent(part)).join("/");
+		}
 		return typeof res === "string" || typeof res === "number" ?
 			encodeURIComponent(res) : match;
 	});

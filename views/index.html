@@ -5,14 +5,14 @@
 	<meta charset="utf-8">
 	<title>Photo Sharing</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="{{ resolveURI("asset", "main.css") }}">
 </head>
 
 <body>
 	<header>
 		<h1>
 			<b>Photo Sharing</b>
-			<img src="logo.jpg" alt="">
+			<img src="{{ resolveURI("asset", "logo.jpg") }}" alt="">
 		</h1>
 
 		<article class="profile">
@@ -91,7 +91,7 @@
 		</fieldset>
 	</form>
 
-	<script type="module" src="elements/community-likes/index.js" async></script>
+	<script type="module" src="{{ resolveURI("asset", "elements/community-likes/index.js") }}" async></script>
 </body>
 
 </html>
