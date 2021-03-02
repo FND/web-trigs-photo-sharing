@@ -3,7 +3,7 @@
 	"private": true,
 	"scripts": {
 		"start": "node src/index.js",
-		"dev": "nodemon --watch src npm start",
+		"dev": "nodemon --no-stdin --watch src --watch views --ext js,html npm start",
 		"test": "eslint --cache src assets/elements && echo ✓"
 	},
 	"type": "module",
